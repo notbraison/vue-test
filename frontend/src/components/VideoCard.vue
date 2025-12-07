@@ -171,6 +171,13 @@ onBeforeUnmount(() => {
 });
 </script>
 
+<script lang="ts">
+// provide a classic default export for tooling/type-checkers that expect it
+export default {
+  name: 'VideoCard',
+};
+</script>
+
 <style scoped>
 
 
@@ -208,6 +215,8 @@ onBeforeUnmount(() => {
   align-items: center;
   padding: 8px;
   background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5) 100%);
+  z-index: 30;
+  pointer-events: auto;
 }
 
 .controls.hidden { display: none; }
@@ -216,9 +225,20 @@ onBeforeUnmount(() => {
 .progress input[type=range] { width: 100%; }
 .time { color: #fff; font-size: 13px; min-width: 80px; text-align: center; }
 .volume { width: 90px; }
-.rate { background: rgba(255,255,255,0.04); color: #fff; border: 0; padding: 4px 6px; border-radius: 4px; }
+.rate {
+  background: rgba(255,255,255,0.06);
+  color: var(--color-text);
+  border: 0;
+  padding: 4px 6px;
+  border-radius: 4px;
+  -webkit-appearance: none;
+  appearance: none;
+}
 
-.meta { padding: 12px 16px; }
+/* Make option text visible across browsers */
+.rate option { color: var(--color-text); background: var(--color-background); }
+
+.meta { padding: 12px 16px; color: var(--color-text); }
 .title { margin: 0 0 4px 0; font-size: 18px; color: var(--color-heading); }
 .subtitle { margin: 0; color: var(--color-text); font-size: 13px; }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <button
     class="theme-toggle"
-    :aria-pressed="isDark.toString()"
+    :aria-pressed="isDark"
     @click="toggle"
     title="Toggle dark / light"
   >
