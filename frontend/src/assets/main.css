@@ -24,7 +24,8 @@ a,
 @media (min-width: 1024px) {
   body {
     display: flex;
-    place-items: center;
+    align-items: flex-start;
+    /* place-items: center;        was centering the entire app vertically for large viewports, which made your single h1 appear vertically centered. Switching to align-items: flex-start keeps horizontal centering via the #app container while aligning content to the top.      */
   }
 
   #app {
