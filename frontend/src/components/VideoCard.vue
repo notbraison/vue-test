@@ -12,7 +12,7 @@
         @dblclick.prevent="toggleFullscreen"
       ></video>
 
-      <div class="controls" :class="{ hidden: hideControls }">
+      <div class="controls" :class="controlsClass">
         <button class="btn play" @click="togglePlay">
           <span v-if="!playing">►</span>
           <span v-else>❚❚</span>
@@ -22,14 +22,14 @@
           <input
             type="range"
             min="0"
-            :max="duration"
+            :max="duration.value"
             step="0.1"
             v-model.number="currentTime"
             @input="seek"
           />
         </div>
 
-        <div class="time">{{ formatTime(currentTime) }} / {{ formatTime(duration) }}</div>
+        <div class="time">{{ formatTime(currentTime) }} / {{ formatTime(duration.value) }}</div>
 
         <input class="volume" type="range" min="0" max="1" step="0.01" v-model.number="volume" @input="onVolume" />
 
@@ -50,7 +50,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount } from 'vue';
+import { ref, onMounted, onBeforeUnmount, computed } from 'vue';
+
 
 // Use Vite's import meta URL to resolve the asset path reliably
 const videoSrc = new URL('../assets/video/This is _Just a test_.mp4', import.meta.url).href;
@@ -64,6 +65,9 @@ const volume = ref(1);
 const playbackRate = ref(1);
 const rates = [0.5, 0.75, 1, 1.25, 1.5, 2];
 const hideControls = ref(false);
+
+const controlsClass = computed(() => ({ hidden: hideControls.value }));
+// helper: sometimes template type-check wants .value explicitly
 
 function togglePlay() {
   if (!video.value) return;
