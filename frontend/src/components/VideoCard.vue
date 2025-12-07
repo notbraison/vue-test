@@ -22,14 +22,14 @@
           <input
             type="range"
             min="0"
-            :max="duration.value"
+            :max="(duration as any)"
             step="0.1"
             v-model.number="currentTime"
             @input="seek"
           />
         </div>
 
-        <div class="time">{{ formatTime(currentTime) }} / {{ formatTime(duration.value) }}</div>
+        <div class="time">{{ formatTime(currentTime) }} / {{ formatTime(duration) }}</div>
 
         <input class="volume" type="range" min="0" max="1" step="0.01" v-model.number="volume" @input="onVolume" />
 
